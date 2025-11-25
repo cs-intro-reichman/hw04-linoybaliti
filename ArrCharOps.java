@@ -259,7 +259,7 @@ public class ArrCharOps {
      * ...
      * @return an integer that represents the difference between the two strings.
      */
-    public static int compareTo(String str1, String str2) {
+   public static int compareTo(String str1, String str2) {
 
         if (str1 == null || str2 == null) {
             return -2; 
@@ -267,7 +267,6 @@ public class ArrCharOps {
 
         int len1 = str1.length();
         int len2 = str2.length();
-        // רצים רק עד האורך של המחרוזת הקצרה ביותר
         int limit = Math.min(len1, len2); 
 
         // 1. בדיקת הבדלים בתווים המשותפים
@@ -276,23 +275,25 @@ public class ArrCharOps {
             char c2 = str2.charAt(i);
             
             if (c1 != c2) {
-                // כלל 1: אם נמצא הבדל, מחזירים את ההפרש המספרי (Unicode).
-                // לדוגמה: 'b' - 'a' יחזיר 1 (חיובי), 'a' - 'b' יחזיר -1 (שלילי).
-                return c1 - c2; 
+                // כלל 1: מחזירים -1 או 1 בהתאם לגודל התו
+                if (c1 < c2) return -1;
+                else return 1;
             }
         }
         
-        // 2. כלל 2 ו-3: טיפול באורכים שונים (אם לא נמצא הבדל בתווים)
+        // 2. כלל 2 ו-3: טיפול באורכים שונים
         
-        // אם כל התווים המשותפים שווים, ההפרש באורכים הוא התוצאה:
-        // אם str1 קצרה, התוצאה שלילית (קטנה יותר).
-        // אם str1 ארוכה, התוצאה חיובית (גדולה יותר).
-        // אם שוות, התוצאה 0.
-        return len1 - len2; 
+        if (len1 < len2) {
+            // str1 קצרה יותר (כלל 2)
+            return -1; 
+        } else if (len1 > len2) {
+            // str1 ארוכה יותר
+            return 1;
+        } else {
+            // האורכים שווים וכל התווים שווים (כלל 3)
+            return 0;
+        }
     }
-
-
-
 
     
 }
