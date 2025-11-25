@@ -20,7 +20,58 @@ public class KeywordsDetector {
 
     // Iterates through all the sentences.
     // If a sentence contains one or more of the kewords, prints it.
-    public static void detectAndPrint(String[] sentences, String[] keywords) {
+  //  public static void detectAndPrint(String[] sentences, String[] keywords) {
         // Replace this comment with your code
+
+     //   for (int i =0; i< sentences.length; i++){
+    //       for (int j=0; j<keywords.length; j++){
+      //      if (sentences[i].contains(keywords[j])) {
+              //  System.out.println(sentences[i]);
+       //     }
+            
+      //     }
+
+
+     //   }
+
+
+
+   // }
+
+
+/**
+ * מדפיס את כל המשפטים במערך sentences שמכילים 
+ * לפחות אחת ממילות המפתח במערך keywords, ללא רגישות לאותיות.
+ */
+public static void detectAndPrint(String[] sentences, String[] keywords) {
+    
+    // לולאה חיצונית: עוברת על כל משפט
+    for (String sentence : sentences) {
+        
+        // 1. חובה: המרת המשפט לאותיות קטנות לטיפול ב-Case-Insensitive
+        String lowerCaseSentence = sentence.toLowerCase();
+        
+        // לולאה פנימית: עוברת על כל מילת מפתח
+        for (String keyword : keywords) {
+            
+            // 2. חובה: השוואה ללא רגישות לאותיות
+            if (lowerCaseSentence.contains(keyword.toLowerCase())) {
+                
+                // 3. מדפיס את המשפט המקורי (עם הרישיות שלו)
+                System.out.println(sentence); 
+                
+                // 4. חובה: יציאה מיידית מהלולאה הפנימית
+                //   כדי למנוע הדפסה חוזרת של אותו משפט אם הוא מכיל יותר מקלישאה אחת.
+                break; 
+            }
+        }
     }
+}
+
+
+
+
+
+
+
 }

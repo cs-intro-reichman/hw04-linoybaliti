@@ -166,6 +166,8 @@ public class ArrCharOps {
     return hash;
     }
 
+
+
     /**
      * Compares the two strings lexicographically.
      * Assume that both strings are not empty.
@@ -190,66 +192,107 @@ public class ArrCharOps {
      *         zero if they are equal, and 1 if str1 is
      *         lexicographically greater than str2.
      *         return -2 if there is an error with the input.
+     * 
+     * 
+     * 
      */
-    public static int compareTo(String str1, String str2) {
+  //  public static int compareTo(String str1, String str2) {
+
+   // if (str1 == null || str2 == null) {
+   //     return -2; 
+   // }
+        // Replace the following statement with your code
+  // if (str1.length() == str2.length()){
+  //  for (int i=0; i<str1.length(); i++){
+      //  char c1 = str1.charAt(i);
+    //    char c2 = str2.charAt(i);
+      //  if (c1 != c2){
+            // אם שונות, מחזירים מיד (כלל 1) ויוצאים!
+       //     if (c1 < c2) return -1;
+         //   else return 1;
+    //    }
+   // }
+    // אם הלולאה הסתיימה, סימן שהן זהות
+   // return 0; // !! החזר 0 בתוך הבלוק !!
+//}
+   // else if (str1.length()> str2.length()){
+    
+    //    for (int i =0; i<str2.length(); i++){
+        //    char c1 = str1.charAt(i);
+         //   char c2 = str2.charAt(i);
+         //   int unicodevalue1 = (int) c1;
+         //   int unicodevalue2 = (int) c2;
+           // if ( unicodevalue1 < unicodevalue2){ // מחרוזת 2 גדולה יותר במילון
+          //      return -1;
+          //  }
+          //  else if (unicodevalue1 > unicodevalue2){ // מחרוזת 1 גדולה יותר במילון
+          //      return 1;
+         //   }
+        // }
+         //    return 1; // מחרוזת 1 גדולה יותר כי זהות ו 1 יותר ארוכה אחרי שזהות
+ 
+   // }
+   //  else if (str1.length()< str2.length()){
+        
+   //     for (int i =0; i<str1.length(); i++){
+      //      char c1 = str1.charAt(i);
+    //        char c2 = str2.charAt(i);
+      //      int unicodevalue1 = (int) c1;
+      //      int unicodevalue2 = (int) c2;
+      //      if ( unicodevalue1 > unicodevalue2){ 
+           //     return 1;
+      // //     }
+          //  else if (unicodevalue1 < unicodevalue2){ 
+           //     return -1;
+         //   }
+       //  }
+       //      return -1; 
+ 
+  //  }
+    
+      //  return -2;
+  //  } 
+
+
+
+
+
+public static int compareTo(String str1, String str2) {
 
     if (str1 == null || str2 == null) {
         return -2; 
     }
-        // Replace the following statement with your code
-   if (str1.length() == str2.length()){
-    for (int i=0; i<str1.length(); i++){
+
+    int len1 = str1.length();
+    int len2 = str2.length();
+    // רצים רק עד האורך של המחרוזת הקצרה יותר
+    int limit = Math.min(len1, len2); 
+
+    // 1. כלל 1: בדיקת הבדלים בתווים המשותפים
+    for (int i = 0; i < limit; i++) {
         char c1 = str1.charAt(i);
         char c2 = str2.charAt(i);
-        if (c1 != c2){
-            // אם שונות, מחזירים מיד (כלל 1) ויוצאים!
+        
+        if (c1 != c2) {
+            // אם נמצא הבדל, מחזירים מיד את ההשוואה:
             if (c1 < c2) return -1;
             else return 1;
         }
     }
-    // אם הלולאה הסתיימה, סימן שהן זהות
-    return 0; // !! החזר 0 בתוך הבלוק !!
+    
+    // 2. כלל 2 ו-3: טיפול באורכים שונים (אם לא נמצא הבדל בתווים)
+    
+    if (len1 < len2) {
+        // str1 קצרה יותר וזהה עד לגבול (כמו "abc" מול "abcd")
+        return -1; 
+    } else if (len1 > len2) {
+        // str1 ארוכה יותר וזהה עד לגבול (כמו "abcd" מול "abc")
+        return 1;
+    } else {
+        // האורכים שווים וכל התווים שווים
+        return 0;
+    }
 }
-    else if (str1.length()> str2.length()){
-    
-        for (int i =0; i<str2.length(); i++){
-            char c1 = str1.charAt(i);
-            char c2 = str2.charAt(i);
-            int unicodevalue1 = (int) c1;
-            int unicodevalue2 = (int) c2;
-            if ( unicodevalue1 < unicodevalue2){ // מחרוזת 2 גדולה יותר במילון
-                return -1;
-            }
-            else if (unicodevalue1 > unicodevalue2){ // מחרוזת 1 גדולה יותר במילון
-                return 1;
-            }
-         }
-             return 1; // מחרוזת 1 גדולה יותר כי זהות ו 1 יותר ארוכה אחרי שזהות
- 
-    }
-     else if (str1.length()< str2.length()){
-        
-        for (int i =0; i<str1.length(); i++){
-            char c1 = str1.charAt(i);
-            char c2 = str2.charAt(i);
-            int unicodevalue1 = (int) c1;
-            int unicodevalue2 = (int) c2;
-            if ( unicodevalue1 > unicodevalue2){ 
-                return 1;
-            }
-            else if (unicodevalue1 < unicodevalue2){ 
-                return -1;
-            }
-         }
-             return -1; 
- 
-    }
-    
-        return -2;
-    } 
-
-
-
 
     
 }
