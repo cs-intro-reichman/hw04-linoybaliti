@@ -36,30 +36,45 @@ public class ArrCharOps {
     /** Returns the char value at the specified index. Assume that the array is non-empty.
      */
     public static char charAt(char[] arr, int index) {
-        // Replace the following statement with your code
-        return 0;
+          return arr[index];
     }
 
     /** If the two arrays have the same value in every index, 
      *  returns true; Otherwise returns false.
      */
     public static boolean equals(char[] arr1, char[] arr2) {
-        // Replace the following statement with your code
-        return false;
+        if (arr1.length != arr2.length){
+            return false;
+        }
+        for (int i=0; i<arr1.length; i++){
+            if (arr1[i] != arr2[i] ){
+                return false;
+            }
+        }
+        return true;
     }
 
     /** Returns the index within the given array of the first occurrence of the given character.
      *  If no such character is found, returns -1.
      */
     public static int indexOf(char[] arr, char ch) {
-        // Replace the following statement with your code
+        for (int i = 0; i < arr.length; i++) {
+        if (arr[i] == ch) {
+            return i;
+        }
+    }
+
         return -1;
     }
 
     /** Same as indexOf(char[], char), but starts the search in the given index.
      */
     public static int indexOf(char[] arr, char ch, int fromIndex) {
-        // Replace the following statement with your code
+          for (int i = fromIndex; i < arr.length; i++) {
+        if (arr[i] == ch) {
+            return i;
+        }
+    }
         return -1;
     }
 
@@ -67,15 +82,30 @@ public class ArrCharOps {
      *  If no such character is found, returns -1.
      */
     public static int lastIndexOf(char[] arr, char ch) {
-        // Replace the following statement with your code
+          for (int i = arr.length - 1; i >= 0; i--) {
+             if (arr[i] == ch) {
+             return i; // מחזירים מיד ויוצאים!
+              }
+    }
+
         return -1;
     }
 
     /* Returns an array which is the concatanation of the two given arrays.
     */
     public static char[] concat(char[] arr1, char[] arr2) {
-        // Replace the following statement with your code
-        return null;
+      
+    int newLength = arr1.length + arr2.length;
+    char[] newArray = new char[newLength];
+
+    for (int i = 0; i < arr1.length; i++) {
+        newArray[i] = arr1[i];
+    }
+    for (int j = arr1.length; j < newArray.length; j++) {
+        newArray[j] = arr2[j - arr1.length];
+    }
+    
+    return newArray;
     }
 
     /** Returns a new array that can be described as a sub-array of this array.
@@ -84,8 +114,14 @@ public class ArrCharOps {
      *  characters containing the characters "urge".
      */     
     public static char[] subArray(char[] arr, int beginIndex, int endIndex) {
-        // Replace the following statement with your code
-        return null;
+        
+        char [] newArray = new char[endIndex - beginIndex]; // יצירת מערך חדש בגודל האינדקס הדרוש
+         int index =0;
+        for (int i = beginIndex; i< endIndex; i++){
+                newArray[index] = arr[i];
+                index++;
+            }
+        return newArray;
     }
 
      /** Returns a single integer that represents the given array. This integer is sometimes 
@@ -95,10 +131,42 @@ public class ArrCharOps {
      *  where arr[i] is the i'th character of the array, and n is the array's length.
      *  The hash value of an empty array is zero.
      */
-    public static long hashCode(char[] arr) {
+  //  public static long hashCode(char[] arr) {
         // Replace the following statement with your code
+   //     if ( arr == null || arr.length == 0){
+   //         return 0;
+   //     }
+   //     long sum = 0;
+   //     int x = arr.length -1;
+   //     for (int i=0; i<arr.length; i++){      
+      //    sum +=  arr[i]* (long)Math.pow(7, x);
+    //       x--;
+      //  }
+      //  return sum;
+  //  }
+     public static long hashCode(char[] arr) {
+    if (arr == null || arr.length == 0){
         return 0;
     }
+    
+    long hash = 0;
+    // המשתנה power מחזיק את 7^(n-1-i) הנוכחי.
+    long power = 1; 
+    
+    // מתחילים מהאיבר האחרון (arr[n-1] * 7^0) וממשיכים לאחור
+    for (int i = arr.length - 1; i >= 0; i--) { 
+        // arr[i] מומר אוטומטית ל-long בחישוב
+        hash += arr[i] * power; 
+        
+        // מעלים את החזקה לקראת האיבר הבא (7^1, 7^2, וכו')
+        if (i > 0) {
+            power *= 7;
+        }
+    }
+    return hash;
+    }
+
+
 
     /**
      * Compares the two strings lexicographically.
@@ -124,9 +192,93 @@ public class ArrCharOps {
      *         zero if they are equal, and 1 if str1 is
      *         lexicographically greater than str2.
      *         return -2 if there is an error with the input.
+     * 
+     * 
+     * 
      */
-    public static int compareTo(String str1, String str2) {
+  //  public static int compareTo(String str1, String str2) {
+
+   // if (str1 == null || str2 == null) {
+   //     return -2; 
+   // }
         // Replace the following statement with your code
+  // if (str1.length() == str2.length()){
+  //  for (int i=0; i<str1.length(); i++){
+      //  char c1 = str1.charAt(i);
+    //    char c2 = str2.charAt(i);
+      //  if (c1 != c2){
+            // אם שונות, מחזירים מיד (כלל 1) ויוצאים!
+       //     if (c1 < c2) return -1;
+         //   else return 1;
+    //    }
+   // }
+    // אם הלולאה הסתיימה, סימן שהן זהות
+   // return 0; // !! החזר 0 בתוך הבלוק !!
+//}
+   // else if (str1.length()> str2.length()){
+    
+    //    for (int i =0; i<str2.length(); i++){
+        //    char c1 = str1.charAt(i);
+         //   char c2 = str2.charAt(i);
+         //   int unicodevalue1 = (int) c1;
+         //   int unicodevalue2 = (int) c2;
+           // if ( unicodevalue1 < unicodevalue2){ // מחרוזת 2 גדולה יותר במילון
+          //      return -1;
+          //  }
+          //  else if (unicodevalue1 > unicodevalue2){ // מחרוזת 1 גדולה יותר במילון
+          //      return 1;
+         //   }
+        // }
+         //    return 1; // מחרוזת 1 גדולה יותר כי זהות ו 1 יותר ארוכה אחרי שזהות
+ 
+   // }
+   //  else if (str1.length()< str2.length()){
+        
+   //     for (int i =0; i<str1.length(); i++){
+      //      char c1 = str1.charAt(i);
+    //        char c2 = str2.charAt(i);
+      //      int unicodevalue1 = (int) c1;
+      //      int unicodevalue2 = (int) c2;
+      //      if ( unicodevalue1 > unicodevalue2){ 
+           //     return 1;
+      // //     }
+          //  else if (unicodevalue1 < unicodevalue2){ 
+           //     return -1;
+         //   }
+       //  }
+       //      return -1; 
+ 
+  //  }
+    
+      //  return -2;
+  //  } 
+
+
+/**
+     * Compares the two strings lexicographically.
+     * ...
+     * @return an integer that represents the difference between the two strings.
+     */
+  public static int compareTo(String str1, String str2) {
+        if (str1 == null || str2 == null)
+            return -2;
+        if (str1.length() == 0 || str2.length() == 0)
+            return -2;
+        for (int i = 0; i < Math.min(str1.length() , str2.length()); i++){
+                if (str1.charAt(i) < str2.charAt(i)){
+                    return -1;
+                }
+                 if (str1.charAt(i) > str2.charAt(i)){
+                    return 1;
+                }   
+            }
+        if (str1.length() < str2.length())
+            return -1;
+        if (str2.length() < str1.length())
+            return 1;
+
         return 0;
+        
     }
+    
 }
