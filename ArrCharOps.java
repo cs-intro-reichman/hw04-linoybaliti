@@ -259,41 +259,26 @@ public class ArrCharOps {
      * ...
      * @return an integer that represents the difference between the two strings.
      */
-   public static int compareTo(String str1, String str2) {
-
-        if (str1 == null || str2 == null) {
-            return -2; 
-        }
-
-        int len1 = str1.length();
-        int len2 = str2.length();
-        int limit = Math.min(len1, len2); 
-
-        // 1. בדיקת הבדלים בתווים המשותפים
-        for (int i = 0; i < limit; i++) {
-            char c1 = str1.charAt(i);
-            char c2 = str2.charAt(i);
-            
-            if (c1 != c2) {
-                // כלל 1: מחזירים -1 או 1 בהתאם לגודל התו
-                if (c1 < c2) return -1;
-                else return 1;
+  public static int compareTo(String str1, String str2) {
+        if (str1 == null || str2 == null)
+            return -2;
+        if (str1.length() == 0 || str2.length() == 0)
+            return -2;
+        for (int i = 0; i < Math.min(str1.length() , str2.length()); i++){
+                if (str1.charAt(i) < str2.charAt(i)){
+                    return -1;
+                }
+                 if (str1.charAt(i) > str2.charAt(i)){
+                    return 1;
+                }   
             }
-        }
-        
-        // 2. כלל 2 ו-3: טיפול באורכים שונים
-        
-        if (len1 < len2) {
-            // str1 קצרה יותר (כלל 2)
-            return -1; 
-        } else if (len1 > len2) {
-            // str1 ארוכה יותר
+        if (str1.length() < str2.length())
+            return -1;
+        if (str2.length() < str1.length())
             return 1;
-        } else {
-            // האורכים שווים וכל התווים שווים (כלל 3)
-            return 0;
-        }
-    }
 
+        return 0;
+        
+    }
     
 }
